@@ -98,7 +98,7 @@
             "id"
           ],
           "updateRule": "no action",
-          "deleteRule": "no action"
+          "deleteRule": "cascade"
         }
       },
       "nativeEnums": {},

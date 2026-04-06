@@ -18,6 +18,6 @@ export class Todo {
   @Property({ type: 'boolean' })
   completed?: boolean = false;
 
-  @ManyToOne({ entity: () => TodoList })
+  @ManyToOne({ entity: () => TodoList, deleteRule: 'cascade' })
   todoList!: Rel<TodoList>;
 }
