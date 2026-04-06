@@ -29,7 +29,7 @@ export class AppController {
     return await this.appService.addTodo(todo, id);
   }
 
-  @Get('lists/search')
+  @Get('lists')
   public async searchLists(@Query('title') title?: string) {
     return await this.appService.searchLists(title);
   }
