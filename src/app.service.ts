@@ -14,18 +14,6 @@ export class AppService {
     return { id: list.id, title: list.title };
   }
 
-  public async addTodo(title: string, list_id: number) {
-    const list = await this.em.findOne(TodoList, { id: list_id });
-    if (!list) {
-      throw new BadRequestException(`Todo List ${list_id} does not exist`);
-    }
-    const todo = new Todo();
-    todo.title = title;
-    list.todos.add(todo);
-    await this.em.persist(list).flush();
-    return list;
-  }
-
   public async getList(id: number) {
     const list = await this.em.findOne(TodoList, id, {
       populate: ['todos'],
@@ -67,5 +55,38 @@ export class AppService {
     }
     this.em.remove(list);
     return { id: list.id, title: list.title };
+  }
+
+  public async addTodo(title: string, list_id: number) {
+    const list = await this.em.findOne(TodoList, { id: list_id });
+    if (!list) {
+      throw new BadRequestException(`Todo List ${list_id} does not exist`);
+    }
+    const todo = new Todo();
+    todo.title = title;
+    list.todos.add(todo);
+    await this.em.persist(list).flush();
+    return list;
+  }
+
+  @Transactional()
+  public async updateTodoCompletionStatus(id: number, status: boolean) {
+    const todo = await this.em.findOne(Todo, id);
+    if (!todo) {
+      throw new BadRequestException(`Todo ${id} does not exist`);
+    }
+    todo.completed = status;
+    this.em.persist(todo);
+    return todo;
+  }
+
+  @Transactional()
+  public async deleteTodo(id: number) {
+    const todo = await this.em.findOne(Todo, id);
+    if (!todo) {
+      throw new BadRequestException(`Todo ${id} does not exist`);
+    }
+    this.em.remove(todo);
+    return { id: todo.id, title: todo.title };
   }
 }

@@ -6,10 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller('lists')
+@Controller('')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -18,22 +19,22 @@ export class AppController {
     return await this.appService.createList(title);
   }
 
-  @Post(':id/todos')
+  @Post('lists/:id/todos')
   public async addTodo(@Param('id') id: number, @Body('title') todo: string) {
     return await this.appService.addTodo(todo, id);
   }
 
-  @Get('search')
-  public async searchLists(title: string) {
+  @Get('lists/search')
+  public async searchLists(@Query('title') title?: string) {
     return await this.appService.searchLists(title);
   }
 
-  @Get(':id')
+  @Get('lists/:id')
   public async getList(@Param('id') id: number) {
     return await this.appService.getList(id);
   }
 
-  @Patch(':id')
+  @Patch('lists/:id')
   public async updateListCompletion(
     @Param('id') id: number,
     @Body('status') status: boolean,
@@ -41,8 +42,21 @@ export class AppController {
     return await this.appService.updateListCompletionStatus(id, status);
   }
 
-  @Delete(':id')
+  @Delete('lists/:id')
   public async deleteList(@Param('id') id: number) {
     return await this.appService.deleteList(id);
+  }
+
+  @Patch('todos/:id')
+  public async updateTodoCompletion(
+    @Param('id') id: number,
+    @Body('status') status: boolean,
+  ) {
+    return await this.appService.updateTodoCompletionStatus(id, status);
+  }
+
+  @Delete('todos/:id')
+  public async deleteTodo(@Param('id') id: number) {
+    return await this.appService.deleteTodo(id);
   }
 }
