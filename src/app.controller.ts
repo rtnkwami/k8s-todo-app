@@ -18,6 +18,11 @@ export class AppController {
     return await this.appService.createList(title);
   }
 
+  @Post(':id/todos')
+  public async addTodo(@Param('id') id: number, @Body('title') todo: string) {
+    return await this.appService.addTodo(todo, id);
+  }
+
   @Get('search')
   public async searchLists(title: string) {
     return await this.appService.searchLists(title);
