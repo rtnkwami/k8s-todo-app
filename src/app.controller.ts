@@ -14,6 +14,11 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get('health')
+  public healthCheck() {
+    return { status: 'healthy' };
+  }
+
   @Post()
   public async createList(@Body('title') title: string) {
     return await this.appService.createList(title);
