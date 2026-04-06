@@ -16,7 +16,7 @@ export class Todo {
   title!: string;
 
   @Property({ type: 'boolean' })
-  completed: boolean = false;
+  completed?: boolean = false;
 
   @ManyToOne({ entity: () => TodoList })
   todoList!: Rel<TodoList>;

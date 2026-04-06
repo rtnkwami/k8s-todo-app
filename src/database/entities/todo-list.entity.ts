@@ -15,6 +15,9 @@ export class TodoList {
   @Property({ type: 'string' })
   title!: string;
 
+  @Property({ type: 'boolean' })
+  completed?: boolean = false;
+
   @OneToMany(() => Todo, (todo) => todo.todoList)
   todos = new Collection<Todo>(this);
 }
