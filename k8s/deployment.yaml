@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-api
+spec:
+  selector:
+    matchLabels:
+      app: todo-api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: todo-api
+    spec:
+      containers:
+      - name: todo-api
+        image: todo-api
+        envFrom:
+          - configMapRef:
+              name: todo-api-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "512m"
+          limits:
+            memory: "256Mi"
+            cpu: "512m"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
