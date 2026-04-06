@@ -1,9 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import dbConfig from './database/mikro-orm.config';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot(),
+    MikroOrmModule.forRoot({
+      ...dbConfig,
+      autoLoadEntities: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
