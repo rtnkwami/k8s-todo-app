@@ -6,13 +6,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import dbConfig from './database/mikro-orm.config';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    MikroOrmModule.forRoot({
-      ...dbConfig,
-      autoLoadEntities: true,
-    }),
-  ],
+  imports: [ConfigModule.forRoot(), MikroOrmModule.forRoot({ ...dbConfig })],
   controllers: [AppController],
   providers: [AppService],
 })
