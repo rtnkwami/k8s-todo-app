@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: todo-api-config
-data:
-  DATABASE_URL: postgresql://todo:password@host.docker.internal:5432/todo_db
