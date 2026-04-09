@@ -3,7 +3,8 @@ kind: Application
 metadata:
   name: todo-app
   namespace: argocd-system
-  argocd.argoproj.io/sync-wave: "2"
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   source:
     repoURL: https://github.com/rtnkwami/k8s-todo-app.git
