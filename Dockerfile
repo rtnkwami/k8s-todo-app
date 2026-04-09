@@ -23,4 +23,4 @@ COPY --chown=nestjs:nestjs --from=base ./app/dist/ dist/
 
 USER nestjs
 
-CMD ["node", "dist/main.js"]
+ENTRYPOINT ["node", "dist/main.js"]
