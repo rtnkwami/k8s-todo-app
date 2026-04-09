@@ -4,3 +4,4 @@ dist/
 test/
 .gitignore
 *.md
+k8s/
