@@ -11,5 +11,6 @@ spec:
       method: any
       number: 1
       dataDurability: required
+      failoverQuorum: true
   storage:
     size: 1Gi
